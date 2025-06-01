@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,20 +11,27 @@ export class AppComponent {
 
   data:any[]=[];
 
+
+
+  array1=[1,2,3,4,5]
+  array2=['A','B','C','D']
+
   //1. CREATE AN Observable
   // this is an obervable
-  myObservable=new Observable((observer)=>{
-   setTimeout(()=>{observer.next(1)},1000) ;
-   setTimeout(()=>{observer.next(2)},2000) ;
-   setTimeout(()=>{observer.next(3)},3000) ;
-      // setTimeout(()=>{observer.error(new Error('Something went wrong please check after some time.'))},3000) ;
-   setTimeout(()=>{observer.next(4)},4000) ;
-   setTimeout(()=>{observer.next(5)},5000) ;
-     setTimeout(()=>{
-      observer.complete()
-    },6000)
+  // myObservable=new Observable((observer)=>{
+  //  setTimeout(()=>{observer.next(1)},1000) ;
+  //  setTimeout(()=>{observer.next(2)},2000) ;
+  //  setTimeout(()=>{observer.next(3)},3000) ;
+  //     // setTimeout(()=>{observer.error(new Error('Something went wrong please check after some time.'))},3000) ;
+  //  setTimeout(()=>{observer.next(4)},4000) ;
+  //  setTimeout(()=>{observer.next(5)},5000) ;
+  //    setTimeout(()=>{
+  //     observer.complete()
+  //   },6000)
 
-  })
+  // })
+
+  myObservable=of(this.array1,this.array2,30,45);
 
   onAsynData(){
     //2. This is Observer
@@ -38,10 +45,13 @@ export class AppComponent {
 //   });
 // }
 
+
+
 this.myObservable.subscribe({
   next:(val:any)=>{
     this.data.push(val);
-  },//this will now point to app component this.
+    console.log(val);
+  },//this will now point to app component
   error(err){
     alert(err.message)
   },
