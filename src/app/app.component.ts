@@ -29,13 +29,28 @@ export class AppComponent {
   onAsynData(){
     //2. This is Observer
     // takes 3 callback fun next, error, complete
-  this.myObservable.subscribe((val:any)=>{
+//   this.myObservable.subscribe((val:any)=>{
+//     this.data.push(val);
+//   },(err)=>{
+//     alert(err.message)
+//   },()=>{
+//     alert("All the data is streamed")
+//   });
+// }
+
+this.myObservable.subscribe({
+  next:(val:any)=>{
     this.data.push(val);
-  },(err)=>{
+  },//this will now point to app component this.
+  error(err){
     alert(err.message)
-  },()=>{
-    alert("All the data is streamed")
-  });
+  },
+  complete(){
+alert("All the data is streamed")  
+}
+})
+  
+}
 }
 
-}
+
