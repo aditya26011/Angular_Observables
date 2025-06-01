@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +31,8 @@ export class AppComponent {
 
   // })
 
-  myObservable=of(this.array1,this.array2,30,45);
+  // myObservable=of(this.array1,this.array2,30,45);
+  myObservable=from(this.array1);
 
   onAsynData(){
     //2. This is Observer
