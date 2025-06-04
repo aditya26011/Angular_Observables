@@ -38,15 +38,15 @@ createBtnObs;
 
   myObservable=from([2,4,5,6,7,8]);
 
-  filteredObs=this.myObservable.pipe(map((val)=>{
+  transformedObs=this.myObservable.pipe(map((val)=>{
     return val*5;
   }),filter((val)=>{
     return val%4===0;
   }))
 
-  // filteredObs=this.transformedObs.pipe(filter((val)=>{
-  //   return val%4===0;
-  // }))
+  filteredObs=this.transformedObs.pipe(filter((val)=>{
+    return val%4===0;
+  }))
 
   onAsynData(){
     //2. This is Observer
