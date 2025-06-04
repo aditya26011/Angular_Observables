@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { from, fromEvent, Observable, of } from 'rxjs';
+import { filter, from, fromEvent, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +35,18 @@ createBtnObs;
   // })
 
   // myObservable=of(this.array1,this.array2,30,45);
-  myObservable=from(this.array1);
+
+  myObservable=from([2,4,5,6,7,8]);
+
+  filteredObs=this.myObservable.pipe(map((val)=>{
+    return val*5;
+  }),filter((val)=>{
+    return val%4===0;
+  }))
+
+  // filteredObs=this.transformedObs.pipe(filter((val)=>{
+  //   return val%4===0;
+  // }))
 
   onAsynData(){
     //2. This is Observer
@@ -51,7 +62,7 @@ createBtnObs;
 
 
 
-this.myObservable.subscribe({
+this.filteredObs.subscribe({
   next:(val:any)=>{
     this.data.push(val);
     console.log(val);
@@ -66,21 +77,21 @@ alert("All the data is streamed")
   
 }
 
-createBtnClicked(){
-    this.createBtnObs=fromEvent(this.createbtn.nativeElement,'click')
-                       .subscribe((data)=>{
-                        console.log(data)
-                        this.showDiv()
-                       }) 
-}
+// createBtnClicked(){
+//     this.createBtnObs=fromEvent(this.createbtn.nativeElement,'click')
+//                        .subscribe((data)=>{
+//                         console.log(data)
+//                         this.showDiv()
+//                        }) 
+// }
 ngAfterViewInit(){
-  this.createBtnClicked();
+  // this.createBtnClicked();
 }
-showDiv(){
-  let div=document.createElement('div');
-  div.innerText='Item';
-  document.getElementById('container').appendChild(div);
-}
+// showDiv(){
+//   let div=document.createElement('div');
+//   div.innerText='Item';
+//   document.getElementById('container').appendChild(div);
+// }
 }
 
 
