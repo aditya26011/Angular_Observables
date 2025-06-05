@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import {ajax} from 'rxjs/ajax'
 @Component({
   selector: 'app-subject',
@@ -10,30 +10,36 @@ export class SubjectComponent implements OnInit {
 ngOnInit(){
 // let myObs=new Observable((observer)=>{observer.next(Math.random())});
 
-// const sub=new Subject();
+const sub=new BehaviorSubject<number>(100);
 
 
-// //subscriber 1
-// sub.subscribe((data)=>{
-//   console.log(data)
-// })
+//subscriber 1
+sub.subscribe((data)=>{
+  console.log("subscriber 1 " + data)
+})
 
-// //subscriber
-// sub.subscribe((data)=>{
-//   console.log(data)
-// })
+//subscriber
+sub.subscribe((data)=>{
+  console.log("subscriber 2 " + data)
+})
 
-// sub.next(Math.random())
+sub.next(200)
 
-const subject=new Subject();
-const data=ajax('https://randomuser.me/api/');
+//subscriber 3
+sub.subscribe((data)=>{
+  console.log("subscriber 3 " + data)//last emitted will be 200 for this
+})
 
-subject.subscribe((data)=>{console.log(data)})
-subject.subscribe((data)=>{console.log(data)})
-subject.subscribe((data)=>{console.log(data)})
+// const subject=new Subject();
+// const data=ajax('https://randomuser.me/api/');
 
-//subject consuming data
-data.subscribe(subject);
+// subject.subscribe((data)=>{console.log(data)})
+// subject.subscribe((data)=>{console.log(data)})
+// subject.subscribe((data)=>{console.log(data)})
 
+// //subject consuming data
+// data.subscribe(subject);
+
+// }
 }
 }
